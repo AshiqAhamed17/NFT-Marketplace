@@ -9,7 +9,7 @@ contract CakeNft is ERC721, Ownable {
     error ERC721Metadata__URI_QueryFor_NonExistentToken();
 
     /*//////////////////////////////////////////////////////////////
-                                 TYPES
+                                TYPES
     //////////////////////////////////////////////////////////////*/
     struct CakeColors {
         string plateColor;
