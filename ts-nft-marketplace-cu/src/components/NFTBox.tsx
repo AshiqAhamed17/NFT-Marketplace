@@ -99,3 +99,4 @@ export default function NFTBox({ tokenId, contractAddress, price }: NFTBoxProps)
         </div>
     )
 }
+

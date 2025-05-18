@@ -11,6 +11,7 @@ import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 contract NftMarketplace is ReentrancyGuard {
     using SafeERC20 for IERC20;
 
+    //@audit - info Unused custom error
     error ItemNotForSale(address nftAddress, uint256 tokenId);
     error NotListed(address nftAddress, uint256 tokenId);
     error AlreadyListed(address nftAddress, uint256 tokenId);
@@ -20,12 +21,13 @@ contract NftMarketplace is ReentrancyGuard {
     error PriceMustBeAboveZero();
 
     /*//////////////////////////////////////////////////////////////
-                                 TYPES
+                                TYPES
     //////////////////////////////////////////////////////////////*/
     struct Listing {
         uint256 price;
         address seller;
     }
+    
 
     event ItemListed(address indexed seller, address indexed nftAddress, uint256 indexed tokenId, uint256 price);
     event ItemCanceled(address indexed seller, address indexed nftAddress, uint256 indexed tokenId);
@@ -39,7 +41,7 @@ contract NftMarketplace is ReentrancyGuard {
     mapping(address => uint256) private s_proceeds;
 
     /*//////////////////////////////////////////////////////////////
-                               MODIFIERS
+                            MODIFIERS
     //////////////////////////////////////////////////////////////*/
     modifier notListed(address nftAddress, uint256 tokenId) {
         Listing memory listing = s_listings[nftAddress][tokenId];
@@ -67,7 +69,7 @@ contract NftMarketplace is ReentrancyGuard {
     }
 
     /*//////////////////////////////////////////////////////////////
-                             MAIN FUNCTIONS
+                            MAIN FUNCTIONS
     //////////////////////////////////////////////////////////////*/
     constructor(address paymentToken) {
         // BE AWARE: There are many tokens that are not compatible with this contract!
